@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmscape - Your AI-Powered Film Diary</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Filmscape</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Films</a></li>
+                    <li><a href="#">Diary</a></li>
+                    <li><a href="#">Lists</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search films...">
+                <button id="search-btn"><i class="search-icon">🔍</i></button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Featured Film -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>Discover new films</h2>
+                <p>Keep track of every film you've ever watched (or just start from today)</p>
+                <button class="btn-primary">Get Started</button>
+            </div>
+        </section>
+
+        <!-- Genres Shortcuts -->
+        <section class="genres-section">
+            <div class="container">
+                <div class="genres-container">
+                    <div class="genre-item">
+                        <span>Action</span>
+                    </div>
+                    <div class="genre-item">
+                        <span>Comedy</span>
+                    </div>
+                    <div class="genre-item">
+                        <span>Horror</span>
+                    </div>
+                    <div class="genre-item">
+                        <span>Romance</span>
+                    </div>
+                    <div class="genre-item">
+                        <span>Sci-Fi</span>
+                    </div>
+                    <div class="genre-item">
+                        <span>Drama</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Films Section -->
+        <section class="film-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Trending Films</h2>
+                    <a href="#" class="see-all">See All</a>
+                </div>
+                <div class="film-grid" id="trending-films">
+                    <!-- Films will be added dynamically via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Recommendations Section -->
+        <section class="film-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>AI Recommendations for You</h2>
+                    <a href="#" class="see-all">See All</a>
+                </div>
+                <div class="film-grid" id="ai-recommendations">
+                    <!-- Films will be added dynamically via JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Filmscape</h2>
+                    <p>Your AI-powered film diary</p>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Filmscape. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
