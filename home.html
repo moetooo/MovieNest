@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieNest</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 </head>
 <body>
@@ -21,21 +21,22 @@
                     <li><a href="#">Lists</a></li>
                 </ul>
             </nav>
-            
         </div>
     </header>
+
     <section class="movie-search">
         <div class="container">
             <h2>Search for a Movie</h2>
             <input type="text" id="movieInput" placeholder="Enter movie name...">
             <button onclick="searchMovie()">Search</button>
+            <p id="errorMsg" style="color: red;"></p>
         </div>
+        <p id="result"></p>
     </section>
 
     <footer>
         <div class="container">
             <div class="footer-content">
-                
                 <div class="footer-links">
                     <ul>
                         <li><a href="#">About</a></li>
@@ -45,10 +46,9 @@
                     </ul>
                 </div>
             </div>
-            
         </div>
     </footer>
 
-    <script src="home.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

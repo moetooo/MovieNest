@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .movie-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px;
+            width: 250px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Details</h1>
+    <div id="movieList" class="movie-container"></div>
+    <p id="p"></p>
+    <script>
+        const API_KEY = "ac288ec3d4c1b9dd39e75a9d47faf070";
+    
+        async function getMoviesFromURL() {
+            let params = new URLSearchParams(window.location.search);
+            let movies = params.get("movies");
+            console.log("hello")
+        }
+    
+        
+    </script>
+</body>
+</html>
