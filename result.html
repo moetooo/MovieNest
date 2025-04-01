@@ -5,44 +5,219 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Details</title>
     <style>
+        /* Default light theme styles */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            color: inherit;
         }
         .movie-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            padding: 20px;
         }
         .movie-card {
             border: 1px solid #ddd;
             border-radius: 8px;
-            padding: 10px;
-            margin: 10px;
-            width: 250px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 12px;
+            margin: 15px;
+            width: 220px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
             text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            color: inherit;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         img {
             width: 100%;
+            height: 300px;
+            object-fit: cover;
             border-radius: 5px;
+        }
+        .loading {
+            font-size: 20px;
+            color: #555;
+        }
+        .error {
+            color: red;
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .movie-card h3 {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .movie-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .movie-card p strong {
+            color: #333;
+        }
+
+        /* Dark theme styles */
+        body.dark-mode {
+            background: #2c2c2c;
+            color: #eaeaea;
+        }
+        .movie-card.dark-mode {
+            background-color: #333;
+            border-color: #555;
+            color: #eaeaea;
+        }
+        .loading.dark-mode, .error.dark-mode {
+            color: #ccc;
+        }
+        button.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        button.dark-mode:hover {
+            background-color: #444;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .theme-toggle:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <h1>Movie Details</h1>
+    <div class="loading" id="loadingText">Loading movie details...</div>
     <div id="movieList" class="movie-container"></div>
-    <p id="p"></p>
+    <p id="errorMessage" class="error"></p>
+    <button onclick="goBack()">Go Back</button>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
     <script>
         const API_KEY = "ac288ec3d4c1b9dd39e75a9d47faf070";
-    
-        async function getMoviesFromURL() {
-            let params = new URLSearchParams(window.location.search);
-            let movies = params.get("movies");
-            console.log("hello")
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Get movie names from URL parameter (comma-separated)
+        const movies = urlParams.get('m') ? urlParams.get('m').split(',') : [];
+        const movieListContainer = document.getElementById("movieList");
+        const loadingText = document.getElementById("loadingText");
+        const errorMessage = document.getElementById("errorMessage");
+
+        // Function to fetch movie details from TMDb API
+        async function fetchMovieDetails(movieName) {
+            const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(movieName)}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.results && data.results.length > 0) {
+                    const movie = data.results[0];
+                    displayMovieDetails(movie);
+                } else {
+                    showError(`No movie found for: "${movieName}"`);
+                }
+            } catch (error) {
+                showError("Error fetching movie details.");
+            }
         }
-    
-        
+
+        // Function to display movie details
+        function displayMovieDetails(movie) {
+            const movieCard = document.createElement("div");
+            movieCard.classList.add("movie-card");
+
+            const movieImage = movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : "https://via.placeholder.com/220x330?text=No+Image"; // Default image
+
+            movieCard.innerHTML = `
+                <img src="${movieImage}" alt="${movie.title}">
+                <h3>${movie.title}</h3>
+                <p><strong>Release Date:</strong> ${movie.release_date}</p>
+                <p><strong>Rating:</strong> ${movie.vote_average}</p>
+                <p><strong>Overview:</strong> ${movie.overview}</p>
+            `;
+
+            movieListContainer.appendChild(movieCard);
+        }
+
+        // Function to handle error messages
+        function showError(message) {
+            errorMessage.textContent = message;
+            loadingText.style.display = 'none'; // Hide loading text
+        }
+
+        // Go back button functionality
+        function goBack() {
+            window.history.back();
+        }
+
+        // Start fetching movie details
+        if (movies.length > 0) {
+            movies.forEach((movie) => {
+                fetchMovieDetails(movie);
+            });
+        } else {
+            showError("No movie names provided in the URL.");
+            loadingText.style.display = 'none';
+        }
+
+        // Hide loading text once all movies are loaded
+        window.addEventListener('load', () => {
+            loadingText.style.display = 'none';
+        });
+
+        // Toggle between light and dark themes
+        function toggleTheme() {
+            const body = document.body;
+            const movieCards = document.querySelectorAll(".movie-card");
+            const loadingText = document.getElementById("loadingText");
+            const errorMessage = document.getElementById("errorMessage");
+            const themeToggleButton = document.querySelector(".theme-toggle");
+
+            body.classList.toggle("dark-mode");
+            movieCards.forEach(card => card.classList.toggle("dark-mode"));
+            loadingText.classList.toggle("dark-mode");
+            errorMessage.classList.toggle("dark-mode");
+            themeToggleButton.classList.toggle("dark-mode");
+        }
     </script>
 </body>
 </html>

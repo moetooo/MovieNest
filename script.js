@@ -19,10 +19,10 @@ async function searchMovie() {
             document.getElementById("result").innerText = "Error: " + data.error;
         } else {
 
-            document.getElementById("result").innerText = "Recommended Movies: " + data.movies.join(", ");
-            // m=data.movies
-            // let queryString = encodeURIComponent(JSON.stringify(m));
-            // window.location.href = `result.html?m=${queryString}`;
+            // document.getElementById("result").innerText = "Recommended Movies: " + data.movies.join(", ");
+            m=data.movies
+            let queryString = encodeURIComponent(JSON.stringify(m));
+            window.location.href = `result.html?m=${queryString}`;
             
         }
     } catch (error) {
