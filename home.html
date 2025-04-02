@@ -17,7 +17,14 @@
             <li><a href="home.html">Home</a></li>
             <li><a href="#">Movies</a></li>
             <li><a href="#">Diary</a></li>
-            <li><a href="#">Lists</a></li>
+            <label for="genre">Genre</label>
+            <select id="genre" onchange="redirectToGenre()">
+                <option value="action">Action</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+                <option value="horror">Horror</option>
+                <option value="sci-fi">Sci-Fi</option>
+            </select>
         </ul>
     
         <button id="theme-toggle">

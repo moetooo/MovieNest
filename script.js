@@ -63,29 +63,23 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', newTheme);
     });
     
-//     // Movie search functionality
-//     window.searchMovie = function() {
-//         const movieInput = document.getElementById('movieInput');
-//         const result = document.getElementById('result');
-//         const errorMsg = document.getElementById('errorMsg');
-        
-//         // Get movie name from input
-//         const movieName = movieInput.value.trim();
-        
-//         // Validate input
-//         if (movieName === '') {
-//             errorMsg.textContent = 'Please enter a movie name';
-//             return;
-//         }
-        
-//         // Clear previous error message
-//         errorMsg.textContent = '';
-        
-//         // In a real app, you would make an API call here
-//         // For now, just display a message
-//         result.textContent = `Searching for "${movieName}"...`;
-        
-//         // Clear input field
-//         movieInput.value = '';
-//     };
+
 });
+
+function redirectToGenre() {
+    let genreElement = document.getElementById("genre");
+    
+    if (!genreElement) {
+        console.error("Genre element not found!");
+        return;
+    }
+
+    let genre = genreElement.value; // Get selected genre value
+    if (!genre) {
+        alert("Please select a genre!");
+        return;
+    }
+
+    let queryString = encodeURIComponent(genre); // Encode genre for URL
+    window.location.href = `genre.html?genre=${queryString}`; // Redirect with genre
+}
