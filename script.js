@@ -33,3 +33,59 @@ async function searchMovie() {
 }
 
 
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the theme toggle button
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Check if user has previously selected a theme
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Apply saved theme or default to dark
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    
+    // Toggle theme when button is clicked
+    themeToggle.addEventListener('click', function() {
+        // Get current theme
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        
+        // Switch to opposite theme
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        // Apply new theme
+        document.documentElement.setAttribute('data-theme', newTheme);
+        
+        // Save theme preference
+        localStorage.setItem('theme', newTheme);
+    });
+    
+//     // Movie search functionality
+//     window.searchMovie = function() {
+//         const movieInput = document.getElementById('movieInput');
+//         const result = document.getElementById('result');
+//         const errorMsg = document.getElementById('errorMsg');
+        
+//         // Get movie name from input
+//         const movieName = movieInput.value.trim();
+        
+//         // Validate input
+//         if (movieName === '') {
+//             errorMsg.textContent = 'Please enter a movie name';
+//             return;
+//         }
+        
+//         // Clear previous error message
+//         errorMsg.textContent = '';
+        
+//         // In a real app, you would make an API call here
+//         // For now, just display a message
+//         result.textContent = `Searching for "${movieName}"...`;
+        
+//         // Clear input field
+//         movieInput.value = '';
+//     };
+});
