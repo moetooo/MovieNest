@@ -74,11 +74,20 @@
     </style>
 </head>
 <body>
-    <h1>Movies by Genre</h1>
+    <!-- <h1>Movies by Genre</h1> -->
+    
+    <div id="header"></div>
     <div id="movies">Loading...</div>
     <div id="movies-container"></div>
 
     <script>
+        async function loadComponents() {
+            document.getElementById("header").innerHTML = await (await fetch("header.html")).text();
+        }
+
+        document.addEventListener("DOMContentLoaded", loadComponents);
+
+
         async function fetchMovies() {
             const urlParams = new URLSearchParams(window.location.search);
             const genre = urlParams.get('genre');
@@ -112,7 +121,7 @@
                     return;
                 }
 
-                document.getElementById("movies").innerHTML = `Showing results for: <strong>${genre.charAt(0).toUpperCase() + genre.slice(1)}</strong>`;
+                document.getElementById("movies").innerHTML = `Search Results for: <strong>${genre.charAt(0).toUpperCase() + genre.slice(1)}</strong>`;
 
                 let movieContainer = document.getElementById("movies-container");
                 movieContainer.innerHTML = "";
@@ -138,5 +147,6 @@
 
         window.onload = fetchMovies;
     </script>
+    <script src="script.js"></script>
 </body>
 </html>
