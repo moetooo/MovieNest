@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies by Genre</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to external stylesheet -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -76,18 +75,11 @@
 <body>
     <!-- <h1>Movies by Genre</h1> -->
     
-    <div id="header"></div>
+    <!-- <div id="header"></div> -->
     <div id="movies">Loading...</div>
     <div id="movies-container"></div>
 
     <script>
-        async function loadComponents() {
-            document.getElementById("header").innerHTML = await (await fetch("header.html")).text();
-        }
-
-        document.addEventListener("DOMContentLoaded", loadComponents);
-
-
         async function fetchMovies() {
             const urlParams = new URLSearchParams(window.location.search);
             const genre = urlParams.get('genre');
@@ -147,6 +139,5 @@
 
         window.onload = fetchMovies;
     </script>
-    <script src="script.js"></script>
 </body>
 </html>

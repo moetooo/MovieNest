@@ -33,53 +33,46 @@ async function searchMovie() {
 }
 
 
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the theme toggle button
-    const themeToggle = document.getElementById('theme-toggle');
+// // Wait for DOM to be fully loaded
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Get the theme toggle button
+//     const themeToggle = document.getElementById('theme-toggle');
     
-    // Check if user has previously selected a theme
-    const savedTheme = localStorage.getItem('theme');
+//     // Check if user has previously selected a theme
+//     const savedTheme = localStorage.getItem('theme');
     
-    // Apply saved theme or default to dark
-    if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
+//     // Apply saved theme or default to dark
+//     if (savedTheme) {
+//         document.documentElement.setAttribute('data-theme', savedTheme);
+//     } else {
+//         document.documentElement.setAttribute('data-theme', 'dark');
+//     }
     
-    // Toggle theme when button is clicked
-    themeToggle.addEventListener('click', function() {
-        // Get current theme
-        const currentTheme = document.documentElement.getAttribute('data-theme');
+//     // Toggle theme when button is clicked
+//     themeToggle.addEventListener('click', function() {
+//         // Get current theme
+//         const currentTheme = document.documentElement.getAttribute('data-theme');
         
-        // Switch to opposite theme
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+//         // Switch to opposite theme
+//         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
-        // Apply new theme
-        document.documentElement.setAttribute('data-theme', newTheme);
+//         // Apply new theme
+//         document.documentElement.setAttribute('data-theme', newTheme);
         
-        // Save theme preference
-        localStorage.setItem('theme', newTheme);
-    });
+//         // Save theme preference
+//         localStorage.setItem('theme', newTheme);
+//     });
     
 
-});
+// });
 
-function redirectToGenre() {
-    let genreElement = document.getElementById("genre");
-    
-    if (!genreElement) {
-        console.error("Genre element not found!");
-        return;
-    }
-
-    let genre = genreElement.value; // Get selected genre value
+function redirectToGenre(genre) {
     if (!genre) {
         alert("Please select a genre!");
         return;
     }
 
     let queryString = encodeURIComponent(genre); // Encode genre for URL
-    window.location.href = `genre.html?genre=${queryString}`; // Redirect with genre
+    window.location.href = `genre.html?genre=${queryString}`; // Redirect to selected genre
 }
+

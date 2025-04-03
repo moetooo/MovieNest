@@ -5,39 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieNest</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 </head>
 <body>
-    <header>
-        <div class="brand-name">
-            <span class="full-green">MOVIE</span><span class="half-border">NEST</span>
-        </div>
-    
-        <ul class="nav_links">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="#">Movies</a></li>
-            <li><a href="#">Diary</a></li>
-            <label for="genre">Genre</label>
-            <select id="genre" onchange="redirectToGenre()">
-                <option value="action">Action</option>
-                <option value="comedy">Comedy</option>
-                <option value="drama">Drama</option>
-                <option value="horror">Horror</option>
-                <option value="romance">Romance</option>
-                <option value="drama">Drama</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="crime">Crime</option>
-                <option value="thriller">Thriller</option>
-                <option value="science fiction">Sci-Fi</option>
-                <option value="mystery">Mystery</option>
-            </select>
-        </ul>
-    
-        <button id="theme-toggle">
-            <div class="toggle-icon"></div>
-        </button>
-    </header>
-
+    <div id="header"></div>
     <section class="movie-search">
         <div class="container">
             <h2>Search for a Movie</h2>
@@ -55,7 +25,7 @@
             </ul>
         </nav>
     </footer>
-
+    <script src="component.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
