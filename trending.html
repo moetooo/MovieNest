@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Movies (Daily)</title>
+    <style>
+        /* Dark theme styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #000;
+            color: #eaeaea;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+        }
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .movie-card {
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px;
+            width: 220px;
+            background-color: #222;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            color: #eaeaea;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.15);
+        }
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .loading {
+            font-size: 20px;
+            color: #bbb;
+        }
+        .error {
+            color: red;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Trending Movies (Daily)</h1>
+
+    <div class="loading" id="loadingText">Loading trending movies...</div>
+    <div id="movieList" class="movie-container"></div>
+    <p id="errorMessage" class="error"></p>
+
+    <script>
+        const API_KEY = "ac288ec3d4c1b9dd39e75a9d47faf070"; // Replace with your TMDb API Key
+        const movieListContainer = document.getElementById("movieList");
+        const loadingText = document.getElementById("loadingText");
+        const errorMessage = document.getElementById("errorMessage");
+
+        // Fetch daily trending movies
+        async function fetchTrendingMovies() {
+            const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.results && data.results.length > 0) {
+                    data.results.forEach(movie => displayMovieDetails(movie));
+                } else {
+                    showError("No trending movies found.");
+                }
+            } catch (error) {
+                showError("Error fetching trending movies.");
+            } finally {
+                loadingText.style.display = "none"; // Hide loading text
+            }
+        }
+
+        // Display movie details
+        function displayMovieDetails(movie) {
+            const movieCard = document.createElement("div");
+            movieCard.classList.add("movie-card");
+
+            const movieImage = movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : "https://via.placeholder.com/220x330?text=No+Image";
+
+            movieCard.innerHTML = `
+                <img src="${movieImage}" alt="${movie.title}">
+                <h3>${movie.title}</h3>
+                <p><strong>Release Date:</strong> ${movie.release_date || "N/A"}</p>
+                <p><strong>Rating:</strong> ${movie.vote_average || "N/A"}</p>
+                <p><strong>Overview:</strong> ${movie.overview || "No description available."}</p>
+            `;
+
+            movieListContainer.appendChild(movieCard);
+        }
+
+        // Handle error messages
+        function showError(message) {
+            errorMessage.textContent = message;
+            loadingText.style.display = "none";
+        }
+
+        // Load trending movies (Daily)
+        fetchTrendingMovies();
+    </script>
+
+</body>
+</html>
